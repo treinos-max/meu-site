@@ -54,7 +54,25 @@
   }
   .display{font-family:'Bebas Neue',sans-serif; letter-spacing:0.04em;}
 
-  header{font-family:'Poppins',sans-serif;}
+  header{
+    display:flex;
+    justify-content:center;   /* centraliza horizontalmente */
+    align-items:center;
+    padding:18px 16px 8px;
+    font-family:'Poppins',sans-serif;
+  }
+  .logo{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:0.04em;
+    color:var(--text);
+    line-height:1;
+    display:flex;
+    align-items:baseline;
+    gap:7px;                  /* mesmo espaçamento do h1 */
+  }
+  .logo .divider{color:var(--text-faint); font-size:16px;}
+  .logo .hl{color:var(--composto);}
 
   .app{
     position:relative; z-index:20;
@@ -313,9 +331,8 @@
 <body>
 
 <header>
-  <div class="logo">Treino 09/26</div>
-  <nav>
-  </nav>
+  <div class="logo">Treino<span class="divider">·</span><span class="hl">09/26</span></div>
+  <nav></nav>
 </header>
 
 <div class="app">
