@@ -56,7 +56,6 @@
 
   header{font-family:'Poppins',sans-serif;}
 
-  /* ---------- Top bar ---------- */
   .app{
     position:relative; z-index:20;
     background:linear-gradient(180deg, var(--bg) 80%, transparent);
@@ -94,7 +93,6 @@
     background:var(--composto-bg); color:var(--composto); border-color:var(--composto);
   }
 
-  /* ---------- Settings drawer ---------- */
   .settings{
     margin:10px 16px 0; background:var(--surface); border:1px solid var(--border);
     border-radius:var(--radius); padding:14px; display:none;
@@ -124,14 +122,12 @@
     padding:2px; cursor:pointer;
   }
 
-  /* ---------- Day section ---------- */
   main{padding:14px 16px 0; max-width:none; margin:0;}
   .day-sub{
     font-size:12.5px; color:var(--text-dim); margin:2px 0 16px; line-height:1.5;
     background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 12px;
   }
 
-  /* ---------- Exercise card ---------- */
   .card{
     background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
     margin-bottom:12px; overflow:hidden;
@@ -171,19 +167,7 @@
     border-radius:9px; padding:10px 11px; font-size:14px; font-family:'Inter'; font-weight:600;
   }
   .edit-field input[type=text]:focus, .edit-field select:focus{outline:none; border-color:var(--tier-color);}
-  .toggle-row{display:flex; align-items:center; justify-content:space-between; gap:10px;}
-  .toggle-row .toggle-text{font-size:13px; color:var(--text); line-height:1.4;}
-  .toggle-row .toggle-text small{display:block; color:var(--text-faint); font-size:11px; margin-top:2px; font-weight:400;}
-  .switch{
-    position:relative; width:44px; height:26px; flex-shrink:0; background:var(--surface-2);
-    border:1px solid var(--border); border-radius:999px; cursor:pointer;
-  }
-  .switch .knob{
-    position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
-    background:var(--text-faint); transition:all .18s ease;
-  }
-  .switch.on{background:var(--tier-color); border-color:var(--tier-color);}
-  .switch.on .knob{left:20px; background:#10131a;}
+
   .edit-actions{display:flex; gap:8px; margin-top:4px;}
   .edit-actions button{
     flex:1; border:none; border-radius:9px; padding:10px 0; font-size:13px; font-weight:800; font-family:'Inter';
@@ -238,7 +222,6 @@
   .add-exercise-btn span{font-size:18px; line-height:1; color:var(--composto);}
   .add-exercise-btn:active{background:var(--surface-2);}
 
-  /* load stack (feeder/top/backoff bars) */
   .loadstack{padding:0 14px 12px;}
   .stack-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
   .stack-label{font-size:10.5px; color:var(--text-dim); width:52px; flex-shrink:0; text-align:right;}
@@ -260,7 +243,6 @@
   .weight-input-row input:focus{outline:none; border-color:var(--tier-color);}
   .weight-input-row .unit{font-size:12px; color:var(--text-faint);}
 
-  /* steps table (mobile: stacked rows) */
   .steps{border-top:1px solid var(--border);}
   .step{
     display:grid; grid-template-columns: 92px 1fr; gap:2px 10px;
@@ -272,7 +254,6 @@
   .step .meta b{color:var(--text); font-weight:600;}
   .step .obs{grid-column:1 / -1; color:var(--text-dim); font-size:11.5px; margin-top:3px; line-height:1.4;}
 
-  /* log row */
   .logrow{
     display:flex; align-items:center; gap:8px; padding:10px 14px 14px; border-top:1px solid var(--border);
   }
@@ -293,7 +274,6 @@
   .hist-item span:first-child{color:var(--text-dim);}
   .hist-empty{color:var(--text-faint); font-style:italic;}
 
-  /* ---------- RPE info panel ---------- */
   .rpe-card{
     background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
     padding:14px 16px; margin-bottom:12px;
@@ -333,6 +313,9 @@
 <body>
 
 <header>
+  <div class="logo">Treino</div>
+  <nav>
+  </nav>
 </header>
 
 <div class="app">
@@ -381,15 +364,15 @@
 
 <script>
 /* ============================================================
-   DADOS — mesmo padrão do PDF: Exercício / Etapa / Séries x Reps / Descanso / RPE alvo / Observação
+   DADOS
    tier: composto | sec | isolador | protecao | padrao | cardio
    step.calc: 'feeder' | 'top' | 'backoff' | null
 ============================================================ */
 const DAYS = {
   seg: { label:"Segunda", sub:"Treino A — Método USA 2X (Full Body)", note:"Full Body 4x/semana. No 1º exercício de cada grupo muscular novo, faça antes 1 série extra de 12-15 reps com carga bem leve. Técnica é inegociável — nunca sacrifique a execução para levantar mais peso.", exercises:[
     {name:"Pulldown com corda", tier:"composto", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida — preparam técnica, articulações e SNC.", calc:"feeder"},
-      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão.", calc:"top"}]},
+      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
+      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão."}]},
     {name:"Remada curvada pronada", tier:"sec", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
@@ -408,18 +391,14 @@ const DAYS = {
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Elevação lateral na polia", tier:"isolador", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
-      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão.", calc:"top"}]},
+      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão."}]},
     {name:"Tríceps francês na polia com corda", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Rosca 45 graus", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Cadeira flexora", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Cadeira extensora", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
   ]},
   ter: { label:"Terça", sub:"Treino B — Método USA 2X (Full Body)", note:"Full Body 4x/semana. No 1º exercício de cada grupo muscular novo, faça antes 1 série extra de 12-15 reps com carga bem leve. Técnica é inegociável — nunca sacrifique a execução para levantar mais peso.", exercises:[
@@ -436,23 +415,19 @@ const DAYS = {
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Remada baixa triângulo", tier:"sec", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"DC Style Rest-Pause", sr:"Falha (8-11) + 20s + falha, x3 blocos", desc:"20s entre blocos", rpe:"-", obs:"Mesma carga nos 3 blocos, sem trocar de peso. Não usa back-off — descanse 2-4 min antes do próximo exercício."}]},
     {name:"Face pull", tier:"isolador", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
-      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão.", calc:"top"}]},
+      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão."}]},
     {name:"Voador (peck deck)", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Desenvolvimento Smith", tier:"composto", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Tríceps testa com halteres", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Rosca alternada", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
   ]},
   qua: { label:"Quarta", sub:"Descanso", note:"Sem treino no Método USA 2X (protocolo de 4x por semana) — dia de descanso ou atividade leve.", exercises:[
@@ -470,28 +445,22 @@ const DAYS = {
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Voador inverso", tier:"isolador", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
-      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão.", calc:"top"}]},
+      {etapa:"Séries válidas", sr:"3 x 9-15", desc:"2-4 min entre séries", rpe:"-", obs:"Mesma carga nas 3 séries. Ao bater 15 reps com técnica perfeita em todas, aumente a carga na próxima sessão."}]},
     {name:"Supino reto com halteres", tier:"composto", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Crucifixo com halteres", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"DC Style Rest-Pause", sr:"Falha (8-11) + 20s + falha, x3 blocos", desc:"20s entre blocos", rpe:"-", obs:"Mesma carga nos 3 blocos, sem trocar de peso. Não usa back-off — descanse 2-4 min antes do próximo exercício."}]},
     {name:"Elevação lateral com halteres", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Tríceps na polia barra reta", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Rosca martelo na polia com corda", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Cadeira abdutora", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"DC Style Rest-Pause", sr:"Falha (8-11) + 20s + falha, x3 blocos", desc:"20s entre blocos", rpe:"-", obs:"Mesma carga nos 3 blocos, sem trocar de peso. Não usa back-off — descanse 2-4 min antes do próximo exercício."}]},
     {name:"Elevação de quadril", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
   ]},
   sex: { label:"Sexta", sub:"Treino D — Método USA 2X (Full Body)", note:"Full Body 4x/semana. No 1º exercício de cada grupo muscular novo, faça antes 1 série extra de 12-15 reps com carga bem leve. Técnica é inegociável — nunca sacrifique a execução para levantar mais peso.", exercises:[
@@ -504,27 +473,22 @@ const DAYS = {
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Cadeira extensora", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Levantamento terra", tier:"composto", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Puxada triângulo", tier:"sec", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Supino inclinado Smith", tier:"composto", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
       {etapa:"Top set", sr:"1 x 5-9", desc:"2-3 min", rpe:"-", obs:"Série pesada, perto da falha entre 5 e 9 reps — registrar carga.", calc:"top"},
       {etapa:"Back-off", sr:"1 x 9-15", desc:"2-4 min", rpe:"-", obs:"Reduza a carga em 20-30% e vá até a falha entre 9 e 15 reps.", calc:"backoff"}]},
     {name:"Supino fechado Smith", tier:"sec", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Y Raise", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Tríceps na corda", tier:"isolador", steps:[
-      {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida."},
       {etapa:"Muscle Round", sr:"6 x 4 (blocos)", desc:"10s entre blocos", rpe:"-", obs:"Carga aproximada de 8RM. Objetivo: alta intensidade com fadiga controlada."}]},
     {name:"Rosca inversa na polia", tier:"isolador", steps:[
       {etapa:"Feeder", sr:"2-3 séries progressivas", desc:"-", rpe:"-", obs:"Séries leves e crescentes antes da 1ª série válida.", calc:"feeder"},
@@ -585,7 +549,7 @@ function renderColorRows(){
   });
 }
 
-/* ---------- storage helpers (localStorage — funciona em qualquer site estático, ex: GitHub Pages) ---------- */
+/* ---------- storage ---------- */
 const LS_PREFIX = "treino-usa2x-v1:";
 function lsGet(key){
   try{ const v = localStorage.getItem(LS_PREFIX + key); return v; }
@@ -663,7 +627,7 @@ async function saveRemoved(dayId, arr){
   return lsSet(removedKey(dayId), JSON.stringify(arr));
 }
 
-let autoOpenIdKey = null; // idKey to auto-open in edit mode right after a fresh render (used after "add exercise")
+let autoOpenIdKey = null;
 
 function showToast(msg){
   const t = document.getElementById("toast");
@@ -697,7 +661,7 @@ function stepMeta(step){
   return `<b>${step.sr}</b><span>·</span><span>Descanso ${step.desc}</span>${rpePart}`;
 }
 
-function loadStackHTML(tier, topVal){
+function loadStackHTML(tier, topVal, showFeeder, showBackoff){
   const feederVal = topVal ? topVal * SETTINGS.feederPct/100 : null;
   const backoffVal = topVal ? topVal * (1 - SETTINGS.backoffPct/100) : null;
   const colorVar = `var(${TIER_VAR[tier]})`;
@@ -715,9 +679,9 @@ function loadStackHTML(tier, topVal){
     </div>`;
   }
   return `<div class="loadstack">
-    ${row("Feeder", feederVal, SETTINGS.feederPct)}
+    ${showFeeder ? row("Feeder", feederVal, SETTINGS.feederPct) : ``}
     ${row("Top set", topVal, 100)}
-    ${row("Back-off", backoffVal, 100 - SETTINGS.backoffPct)}
+    ${showBackoff ? row("Back-off", backoffVal, 100 - SETTINGS.backoffPct) : ``}
   </div>`;
 }
 
@@ -782,12 +746,30 @@ async function renderDay(){
 
   for(const item of items){
     const { ex, idKey } = item;
-    const custom = item.isAdded ? { name: ex.name, showCalc: ex.showCalc, steps: ex.steps, tier: ex.tier } : await loadCustom(currentDay, idKey);
-    const defaultHasCalc = ex.steps.some(s=>s.calc==="top");
+    const custom = item.isAdded ? { name: ex.name, steps: ex.steps, tier: ex.tier } : await loadCustom(currentDay, idKey);
     const displayName = custom.name || ex.name;
-    const showCalc = custom.showCalc !== undefined ? custom.showCalc : defaultHasCalc;
     const effTier = custom.tier || ex.tier;
-    const effSteps = ex.steps.map((s, i)=> ({...s, ...((custom.steps && custom.steps[i]) || {})}));
+
+    // Aqui a grande correção: se custom.steps existe (o usuário já salvou
+    // alguma edição), essa lista é a fonte da verdade — sem merge por índice.
+    // Se cada etapa de custom.steps não tiver calc, tentamos recuperar do
+    // original pelo nome da etapa (fallback) — assim custom antigos não perdem
+    // a barra.
+    let effSteps;
+    if(custom.steps && custom.steps.length){
+      effSteps = custom.steps.map((s, i)=>{
+        if(s.calc !== undefined) return s;
+        const orig = ex.steps[i];
+        return orig && orig.calc ? { ...s, calc: orig.calc } : s;
+      });
+    }else{
+      effSteps = ex.steps;
+    }
+
+    const hasTop = effSteps.some(s => s.calc === "top");
+    const hasFeeder = effSteps.some(s => s.calc === "feeder");
+    const hasBackoff = effSteps.some(s => s.calc === "backoff");
+    const showCalc = hasTop || hasFeeder || hasBackoff;
 
     const card = document.createElement("div");
     card.className = "card";
@@ -805,7 +787,6 @@ async function renderDay(){
     `;
     card.appendChild(head);
 
-    // ---- edit panel (hidden by default) ----
     const editPanel = document.createElement("div");
     editPanel.className = "edit-panel";
     editPanel.style.display = "none";
@@ -819,14 +800,6 @@ async function renderDay(){
         <select class="tier-select">
           ${Object.keys(TIER_LABEL).map(t=>`<option value="${t}" ${t===effTier?'selected':''}>${TIER_LABEL[t]}</option>`).join('')}
         </select>
-      </div>
-      <div class="edit-field">
-        <div class="toggle-row">
-          <div class="toggle-text">Mostrar cálculo de feeder / top set / back-off
-            <small>Liga o campo de carga e a barra de estimativa para este exercício</small>
-          </div>
-          <div class="switch ${showCalc ? 'on':''}"><div class="knob"></div></div>
-        </div>
       </div>
       <div class="steps-edit-wrap"></div>
       <button class="btn-add-step">+ Adicionar etapa</button>
@@ -851,6 +824,7 @@ async function renderDay(){
       se.className = "step-edit";
       se.innerHTML = `
         <div class="step-edit-title"><span>Etapa</span><button class="btn-remove-step" title="Remover etapa">✕</button></div>
+        <input type="hidden" data-field="calc" value="${(s.calc||'').replace(/"/g,'&quot;')}">
         <div class="step-edit-grid">
           <div>
             <label>Etapa</label>
@@ -894,16 +868,10 @@ async function renderDay(){
     renderStepBlocks(effSteps);
 
     editPanel.querySelector(".btn-add-step").onclick = ()=>{
-      stepsEditWrap.appendChild(makeStepBlock({ etapa:"Nova etapa", sr:"", desc:"", rpe:"", obs:"" }));
+      stepsEditWrap.appendChild(makeStepBlock({ etapa:"Nova etapa", sr:"", desc:"", rpe:"", obs:"", calc:"" }));
       renumberSteps();
     };
 
-    let pendingShowCalc = showCalc;
-    const sw = editPanel.querySelector(".switch");
-    sw.onclick = ()=>{
-      pendingShowCalc = !pendingShowCalc;
-      sw.classList.toggle("on", pendingShowCalc);
-    };
     head.querySelector(".edit-btn").onclick = ()=>{
       const open = editPanel.style.display !== "none";
       editPanel.style.display = open ? "none" : "block";
@@ -914,27 +882,30 @@ async function renderDay(){
       head.querySelector(".edit-btn").classList.remove("active");
       editPanel.querySelector(".name-input").value = displayName;
       editPanel.querySelector(".tier-select").value = effTier;
-      pendingShowCalc = showCalc;
-      sw.classList.toggle("on", pendingShowCalc);
       renderStepBlocks(effSteps);
     };
     editPanel.querySelector(".btn-save").onclick = async ()=>{
       const newName = editPanel.querySelector(".name-input").value.trim() || ex.name;
       const newTier = editPanel.querySelector(".tier-select").value;
-      const newSteps = Array.from(stepsEditWrap.querySelectorAll(".step-edit")).map(se=>({
-        etapa: se.querySelector('[data-field="etapa"]').value.trim(),
-        sr: se.querySelector('[data-field="sr"]').value.trim(),
-        desc: se.querySelector('[data-field="desc"]').value.trim(),
-        rpe: se.querySelector('[data-field="rpe"]').value.trim(),
-        obs: se.querySelector('[data-field="obs"]').value.trim(),
-      }));
+      const newSteps = Array.from(stepsEditWrap.querySelectorAll(".step-edit")).map(se=>{
+        const calcVal = (se.querySelector('[data-field="calc"]') || {}).value || "";
+        const step = {
+          etapa: se.querySelector('[data-field="etapa"]').value.trim(),
+          sr: se.querySelector('[data-field="sr"]').value.trim(),
+          desc: se.querySelector('[data-field="desc"]').value.trim(),
+          rpe: se.querySelector('[data-field="rpe"]').value.trim(),
+          obs: se.querySelector('[data-field="obs"]').value.trim()
+        };
+        if(calcVal) step.calc = calcVal;
+        return step;
+      });
       let ok;
       if(item.isAdded){
         const list = await loadAdded(currentDay);
-        list[item.addedIdx] = { ...list[item.addedIdx], name:newName, tier:newTier, showCalc:pendingShowCalc, steps:newSteps };
+        list[item.addedIdx] = { ...list[item.addedIdx], name:newName, tier:newTier, steps:newSteps };
         ok = await saveAdded(currentDay, list);
       }else{
-        ok = await saveCustom(currentDay, idKey, { name: newName, tier: newTier, showCalc: pendingShowCalc, steps: newSteps });
+        ok = await saveCustom(currentDay, idKey, { name: newName, tier: newTier, steps: newSteps });
       }
       editPanel.style.display = "none";
       head.querySelector(".edit-btn").classList.remove("active");
@@ -971,13 +942,13 @@ async function renderDay(){
     let stackDiv = null;
     if(showCalc){
       stackDiv = document.createElement("div");
-      stackDiv.innerHTML = loadStackHTML(effTier, savedTop);
+      stackDiv.innerHTML = loadStackHTML(effTier, savedTop, hasFeeder, hasBackoff);
       card.appendChild(stackDiv);
     }
 
     const isCardio = effTier === "cardio";
     const unitLabel = isCardio ? "min" : "kg";
-    const fieldLabel = isCardio ? "Tempo" : (showCalc ? "Carga do top set" : "Carga usada");
+    const fieldLabel = isCardio ? "Tempo" : (hasTop ? "Carga do top set" : "Carga usada");
     const placeholderVal = isCardio ? "ex: 20" : "ex: 80";
 
     const inputRow = document.createElement("div");
@@ -991,7 +962,7 @@ async function renderDay(){
     weightInput.addEventListener("input", async ()=>{
       const v = parseFloat(weightInput.value);
       const valid = !isNaN(v) && v > 0;
-      if(stackDiv) stackDiv.innerHTML = loadStackHTML(effTier, valid ? v : null);
+      if(stackDiv) stackDiv.innerHTML = loadStackHTML(effTier, valid ? v : null, hasFeeder, hasBackoff);
       await saveWeight(currentDay, idKey, valid ? v : null);
     });
     card.appendChild(inputRow);
@@ -1070,7 +1041,6 @@ async function renderDay(){
     list.push({
       name: "Novo exercício",
       tier: "isolador",
-      showCalc: false,
       steps: [{ etapa:"Série válida", sr:"2 x 10-15", desc:"60s", rpe:"8", obs:"" }]
     });
     await saveAdded(currentDay, list);
@@ -1094,7 +1064,7 @@ function renderHistList(el, hist, unit){
   `).join("");
 }
 
-/* ---------- backup: exportar / importar / excluir ---------- */
+/* ---------- backup ---------- */
 function downloadJSON(payload){
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -1144,7 +1114,6 @@ function deleteAllData(){
   }
   keys.forEach(k=>localStorage.removeItem(k));
 
-  // reset in-memory state back to defaults
   SETTINGS = { feederPct: 70, backoffPct: 25 };
   COLORS = { ...DEFAULT_COLORS };
   applyColors();
